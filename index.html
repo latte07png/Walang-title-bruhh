@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title></title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(135deg, #ffc0cb, #fde1ff, #d0e8ff);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+      color: #333;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    .question-container {
+      display: none;
+      padding: 20px;
+      margin: 80px auto;
+      max-width: 700px;
+      border: 4px solid #333;
+      border-radius: 20px;
+      background-color: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 0 15px #ffc0cb;
+    }
+
+    .question-container.active {
+      display: block;
+    }
+
+    .question {
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+
+    .answers button {
+      font-size: 18px;
+      margin: 10px;
+      padding: 10px 25px;
+      border: 2px solid #333;
+      border-radius: 10px;
+      background-color: #fff;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 500px;
+      color: #333;
+      display: none;
+      z-index: 999;
+      box-shadow: 0 0 20px #ffc0cb;
+      border: 3px solid #333;
+    }
+
+    .popup button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      background: #ffc0cb;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .note-frame {
+      display: none;
+      max-height: 80vh;
+      overflow-y: auto;
+      margin: 50px auto;
+      max-width: 800px;
+      padding: 30px;
+      background-color: rgba(255, 255, 255, 0.7);
+      border: 4px solid #333;
+      border-radius: 30px;
+      font-size: 20px;
+      line-height: 1.7;
+      text-align: left;
+    }
+
+    .bold {
+      font-weight: bold;
+      font-size: 22px;
+    }
+
+    /* Heart Rain */
+    .heart {
+      position: fixed;
+      top: -50px;
+      font-size: 30px;
+      animation: fall 6s linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-50px); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Heart Rain -->
+<script>
+  const hearts = ["🩷", "💖", "💕"];
+  for (let i = 0; i < 20; i++) {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = Math.random() * 3 + 3 + "s";
+    document.body.appendChild(heart);
+  }
+</script>
+
+<!-- Questions -->
+<div class="question-container active" id="q1">
+  <div class="question">Do you know what this is for?</div>
+  <div class="answers">
+    <button onclick="showPopup('Bruh okay', 'q1', 'q2')">No</button>
+    <button onclick="showPopup('Hmm okay... 😵', 'q1', 'q2')">Yes</button>
+  </div>
+</div>
+
+<div class="question-container" id="q2">
+  <div class="question">1 × 1???</div>
+  <div class="answers">
+    <button onclick="showPopup('Yis galing 🤩', 'q2', 'q3')">1</button>
+    <button onclick="showPopup('😈', 'q2', 'q3')">1 😈</button>
+  </div>
+</div>
+
+<div class="question-container" id="q3">
+  <div class="question">2 × 2???</div>
+  <div class="answers">
+    <button onclick="showPopup('WOWKWIWSHSUSYSHDH', 'q3', 'q4')">4</button>
+    <button onclick="showPopup('😡😡😡', 'q3', 'q4')">12938372</button>
+  </div>
+</div>
+
+<div class="question-container" id="q4">
+  <div class="question">1 + 2???</div>
+  <div class="answers">
+    <button onclick="showPopup('Nicee 😌', 'q4', 'note')">3</button>
+    <button onclick="showPopup('Ayyy HAHAHAH', 'q4', 'note')">17172527</button>
+  </div>
+</div>
+
+<!-- Note -->
+<div class="note-frame" id="note">
+  <p>I don’t really know how to make this sound perfect but I hope it means something to you. I just want to say thank you for being here. You probably don’t notice it, but your presence makes a big difference. You’re the kind of person na kahit simple lang, may impact ka pa rin sa mga tao around you.</p>
+  <p>Hindi ako yung best sa pagbati or sa mga pa-special na sulat pero this is me being real. I appreciate you. I admire your softness, your strength, and the way you stay true to yourself. Kahit hindi ko lagi nasasabi, ang laking bagay ng existence mo sakin.</p>
+  <p>Life gets loud and messy, and sometimes we forget to slow down. So I hope today you take a moment to feel proud of how far you’ve come. You deserve a peaceful kind of happiness, one that doesn't need to be loud just to be real. I hope you feel seen, even in silence, and loved even on your quiet days.</p>
+  <p>I don’t have anything big to give you, but I want you to know na kahit tahimik lang ako minsan, I’m genuinely wishing you the best. I’ll always be rooting for you from where I am.</p>
+  <p class="bold">You’re irreplaceable.</p>
+  <p>So happy birthday, Hyeri. Thank you for being you, thank you for existing.</p>
+</div>
+
+<!-- Popup -->
+<div class="popup" id="popup">
+  <div id="popup-message"></div>
+  <button onclick="closePopup()">OK</button>
+</div>
+
+<script>
+  function showPopup(message, current, next) {
+    document.getElementById("popup-message").innerText = message;
+    document.getElementById("popup").style.display = "block";
+    document.getElementById(current).classList.remove("active");
+    document.getElementById("popup").setAttribute("data-next", next);
+  }
+
+  function closePopup() {
+    const nextId = document.getElementById("popup").getAttribute("data-next");
+    document.getElementById("popup").style.display = "none";
+    if (nextId === "note") {
+      document.getElementById("note").style.display = "block";
+    } else {
+      document.getElementById(nextId).classList.add("active");
+    }
+  }
+</script>
+
+</body>
+</html>
